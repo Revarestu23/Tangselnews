@@ -32,10 +32,20 @@
             </div>
         @endif
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form action="{{ route('berita.store') }}" method="POST">
             @csrf
             <div class="form-group">
-                <textarea class="form-control" id="mytextarea" name="content" rows="5" placeholder="Masukkan konten..."></textarea>
+                <textarea class="form-control" id="myTextarea" name="content" rows="5" placeholder="Masukkan konten..."></textarea>
             </div>
             <div class="container-fluid d-flex justify-content-center">
                 <button type="submit" class="btn btn-success">Submit</button>

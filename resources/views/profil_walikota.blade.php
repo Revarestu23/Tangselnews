@@ -52,7 +52,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="konten">Konten</label>
-                                            <textarea name="konten" class="form-control" id="mytextarea" rows="5" placeholder="Masukkan konten..." ></textarea>
+                                            <textarea name="konten" class="form-control" id="myTextarea" rows="5" placeholder="Masukkan konten..." ></textarea>
                                         </div>
                                     </div>
                                 </div>

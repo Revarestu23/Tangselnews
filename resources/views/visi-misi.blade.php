@@ -35,7 +35,7 @@
         <form action="{{ route('visi.misi.store') }}" method="POST">
             @csrf
             <div class="form-group">
-                <textarea class="form-control" id="mytextarea" name="content" rows="5" placeholder="Masukkan konten..."></textarea>
+                <textarea class="form-control" id="myTextarea" name="content" rows="5" placeholder="Masukkan konten..."></textarea>
             </div>
             <div class="container-fluid d-flex justify-content-center">
                 <button type="submit" class="btn btn-success">Submit</button>

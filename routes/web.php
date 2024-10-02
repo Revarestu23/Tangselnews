@@ -128,6 +128,7 @@ Route::middleware('auth')->group(function () {
     
     Route::post('/pejabat/store', [PejabatController::class, 'store'])->name('pejabat.store');
 
+
 });
 
 

@@ -35,7 +35,7 @@
             <form action="{{ route('sejarah.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <textarea class="form-control" name="konten" id="mytextarea" rows="5" placeholder="Masukkan konten..."></textarea>
+                    <textarea class="form-control" name="konten" id="myTextarea" rows="5" placeholder="Masukkan konten..."></textarea>
                 </div>
 
                 <div class="container-fluid d-flex justify-content-center">
