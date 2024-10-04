@@ -21,7 +21,7 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('visi.misi') }}">Visi & Misi</a>
+                    <a href="{{ route('visi.misi.index') }}">Visi & Misi</a>
                 </li>
             </ul>
         </div>
@@ -39,7 +39,7 @@
             </div>
             <div class="container-fluid d-flex justify-content-center">
                 <button type="submit" class="btn btn-success">Submit</button>
-                <a href="{{ route('visi.misi') }}" class="btn btn-danger">Cancel</a>
+                <a href="{{ route('visi.misi.index') }}" class="btn btn-danger">Cancel</a>
             </div>
         </form>
     </div>

@@ -1,35 +1,35 @@
-<!-- resources/views/berita/create.blade.php -->
-
+<!-- resources/views/visi_misi/create.blade.php -->
 @extends('layouts.app')
 
 @section('content')
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
-            <h3 class="fw-bold mb-3">Tambah Berita</h3>
+            <h3 class="fw-bold mb-3">Tambah Visi & Misi</h3>
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
-                    <a href="#">
-                        <i class="fas fa-home"></i>
+                    <a href="{{ route('visi.misi.index') }}">
+                        <i class="icon-home"></i>
                     </a>
                 </li>
                 <li class="separator">
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('berita') }}">Berita</a>
+                    <a href="{{ route('visi.misi.index') }}">Visi & Misi</a>
                 </li>
                 <li class="separator">
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="#">Tambah Berita</a>
+                    <a href="#">Tambah Visi & Misi</a>
                 </li>
             </ul>
         </div>
 
         @if ($errors->any())
             <div class="alert alert-danger">
+                <strong>Whoops!</strong> Terjadi kesalahan saat menginput data.<br><br>
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -38,15 +38,19 @@
             </div>
         @endif
 
-        <form action="{{ route('berita.store') }}" method="POST">
+        <!-- Form Tambah Visi & Misi -->
+        <form action="{{ route('visi.misi.store') }}" method="POST">
             @csrf
-            <div class="form-group">
-                <label for="content">Konten Berita</label>
-                <textarea class="form-control" id="myTextarea" name="content" rows="5" placeholder="Masukkan konten..."></textarea>
+            <div class="form-group mb-3">
+                <label for="content">Konten Visi & Misi</label>
+                <textarea class="form-control" id="myTextarea" name="content" rows="5" placeholder="Masukkan konten...">{{ old('content') }}</textarea>
+                @error('content')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
             </div>
-            <div class="container-fluid d-flex justify-content-center mt-3">
-                <button type="submit" class="btn btn-success">Simpan</button>
-                <a href="{{ route('berita') }}" class="btn btn-danger ml-2">Batal</a>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-success me-2">Submit</button>
+                <a href="{{ route('visi.misi.index') }}" class="btn btn-secondary">Cancel</a>
             </div>
         </form>
     </div>
@@ -57,10 +61,10 @@
         <nav class="pull-left">
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#"> Help </a>
+                    <a class="nav-link" href="#">Help</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"> Licenses </a>
+                    <a class="nav-link" href="#">Licenses</a>
                 </li>
             </ul>
         </nav>

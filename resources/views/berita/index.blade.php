@@ -3,7 +3,6 @@
 @section('content')
 <div class="container">
     <div class="page-inner">
-        <!-- Header -->
         <div class="page-header">
             <h3 class="fw-bold mb-3">Berita</h3>
             <ul class="breadcrumbs mb-3">
@@ -27,78 +26,60 @@
             </ul>
         </div>
 
-        <!-- Notifikasi Sukses -->
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
         @endif
 
-        <!-- Form Pembuatan Berita -->
-        <form action="{{ route('berita.store') }}" method="POST">
-            @csrf
-            <div class="form-group">
-                <textarea class="form-control" id="mytextarea" name="content" rows="5" placeholder="Masukkan konten...">{{ old('content') }}</textarea>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
-            @error('content')
-                <div class="alert alert-danger">
-                    {{ $message }}
-                </div>
-            @enderror
-            <div class="container-fluid d-flex justify-content-center mt-3">
-                <button type="submit" class="btn btn-success">Submit</button>
-                <a href="{{ route('berita.index') }}" class="btn btn-danger ml-2">Cancel</a>
-                <!-- Tombol "History Data" -->
-                <button type="button" class="btn btn-info ml-2" id="toggleHistory">History Data</button>
-            </div>
-        </form>
+        @endif
 
-        <!-- Section History Data -->
-        <div class="mt-5" id="historySection" style="display: none;">
-            <h3 class="fw-bold mb-3">History Data Berita</h3>
-
-            @if ($beritas->count() > 0)
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Content</th>
-                            <th>Created At</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($beritas as $index => $item)
-                            <tr>
-                                <td>{{ $beritas->firstItem() + $index }}</td>
-                                <td>{{ \Illuminate\Support\Str::limit($item->content, 50) }}</td>
-                                <td>{{ $item->created_at->format('d M Y H:i') }}</td>
-                                <td>
-                                    <a href="{{ route('berita.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-
-                                    <form action="{{ route('berita.destroy', $item->id) }}" method="POST" style="display:inline-block;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah kamu yakin ingin menghapus data ini?')">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-
-                <!-- Pagination -->
-                <div class="d-flex justify-content-center">
-                    {{ $beritas->links() }}
-                </div>
-            @else
-                <p class="text-center">Tidak ada data berita.</p>
-            @endif
+        <div class="d-flex justify-content-between mb-3">
+            <h4>Daftar Berita</h4>
+            <a href="{{ route('berita.create') }}" class="btn btn-primary">Tambah Berita</a>
         </div>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Konten</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($berita as $key => $item)
+                    <tr>
+                        <td>{{ $key + 1 }}</td>
+                        <td>{{ $item->content }}</td>
+                        <td>
+                            <a href="{{ route('berita.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            
+                            <form action="{{ route('berita.destroy', $item->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus berita ini?')">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="3" class="text-center">Tidak ada berita</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
 </div>
 
-<!-- Footer -->
 <footer class="footer">
     <div class="container-fluid d-flex justify-content-center">
         <nav class="pull-left">
@@ -116,19 +97,4 @@
         </div>
     </div>
 </footer>
-@endsection
-
-@section('scripts')
-<script>
-    document.getElementById('toggleHistory').addEventListener('click', function() {
-        var historySection = document.getElementById('historySection');
-        if (historySection.style.display === 'none') {
-            historySection.style.display = 'block';
-            this.textContent = 'Hide History';
-        } else {
-            historySection.style.display = 'none';
-            this.textContent = 'History Data';
-        }
-    });
-</script>
 @endsection

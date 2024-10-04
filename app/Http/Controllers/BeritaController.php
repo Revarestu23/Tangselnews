@@ -21,4 +21,33 @@ class BeritaController extends Controller
 
         return redirect()->route('berita')->with('success', 'Berita saved successfully!');
     }
+
+    public function index() 
+    {
+        $berita = Berita::all(); // Mengambil semua data berita dari database
+        return view('berita.index', compact('berita')); // Mengirim data berita ke view
+    }
+    public function create() 
+    {
+        return view('berita.create');
+    }
+    public function edit($id) 
+    {
+        $berita = Berita::findOrFail($id); // Mengambil data berita berdasarkan ID
+        return view('berita.edit', compact('berita')); // Mengirim data berita ke view
+    }
+    public function update(Request $request, $id) 
+    {
+        $berita = Berita::findOrFail($id);
+        $berita->update($request->all()); // Update data berita
+        return redirect()->route('berita')->with('success', 'Berita berhasil diperbarui');
+    }
+    
+    public function destroy($id) {
+        $berita = Berita::findOrFail($id); // Mencari berita berdasarkan ID
+        $berita->delete(); // Menghapus berita dari database
+        return redirect()->route('berita')->with('success', 'Berita berhasil dihapus'); // Redirect dengan pesan sukses
+    }
+    
+    
 }

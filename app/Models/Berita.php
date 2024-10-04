@@ -9,5 +9,5 @@ class Berita extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['content'];
+    protected $fillable = ['content']; // Field yang bisa diisi
 }

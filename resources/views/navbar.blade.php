@@ -1,8 +1,8 @@
 @section('dashboard')
     <!-- Navbar Header -->
-    <script src="back-end/assets/js/core/jquery-3.7.1.min.js"></script>
-    <script src="back-end/assets/js/core/popper.min.js"></script>
-    <script src="back-end/assets/js/core/bootstrap.min.js"></script>
+    <script src="{{ asset('back-end/assets/js/core/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('back-end/assets/js/core/popper.min.js') }}"></script>
+    <script src="{{ asset('back-end/assets/js/core/bootstrap.min.js') }}"></script>
 
     <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
         <div class="container-fluid">

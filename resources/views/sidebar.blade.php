@@ -70,7 +70,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('visi.misi') }}">
+                                        <a href="{{ route('visi.misi.index') }}">
                                             <span class="sub-item">Visi-Misi</span>
                                         </a>
                                     </li>

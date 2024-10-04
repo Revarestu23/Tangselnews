@@ -32,26 +32,45 @@
             </div>
         @endif
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
         <form action="{{ route('berita.store') }}" method="POST">
             @csrf
             <div class="form-group">
                 <textarea class="form-control" id="myTextarea" name="content" rows="5" placeholder="Masukkan konten..."></textarea>
             </div>
             <div class="container-fluid d-flex justify-content-center">
+                <a href="{{ route('berita.create') }}" class="btn btn-primary">Tambah Berita</a>
                 <button type="submit" class="btn btn-success">Submit</button>
-                <a href="{{ route('berita') }}" class="btn btn-danger">Cancel</a>
+                <a href="{{ route('berita.index') }}" class="btn btn-danger">Cancel</a> <!-- Ubah di sini -->
             </div>
+            
         </form>
+
+        <!-- Tampilkan daftar berita dari database -->
+        <div class="mt-4">
+            <h4>Daftar Berita</h4>
+            @if($berita->isEmpty())
+                <p>Tidak ada berita yang tersedia.</p>
+            @else
+                <ul class="list-group">
+                    @foreach($berita as $item)
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{ $item->content }} <!-- Sesuaikan dengan kolom yang ada di tabel berita -->
+                            <div>
+                                <!-- Tombol Edit -->
+                                <a href="{{ route('berita.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                
+                                <!-- Tombol Hapus (opsional, jika ingin menghapus berita) -->
+                                <form action="{{ route('berita.destroy', $item->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus berita ini?')">Hapus</button>
+                                </form>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
     </div>
 </div>
 
